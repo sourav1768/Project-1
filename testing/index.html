@@ -1,0 +1,158 @@
+<html>
+<head>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+
+<style type="text/css">
+
+
+#menu > ul {
+  display: none;
+  list-style-type:none;
+} 
+  
+#menu > ul > li {
+    list-style:none; 
+} 
+  
+#menu > li {
+   list-style:none;   
+  font-weight: bold;
+}
+
+ul > .multi::after {
+  content:' +'
+}
+  
+ul > .multi-opened::after {
+  content:' -'
+}
+
+  
+  
+
+a {
+    color: red;
+}
+</style>
+
+<title></title>
+</head>
+<body>
+
+
+    <ul id="menu" class="list">
+    </ul>
+
+
+
+
+
+<script type="text/javascript">
+    $(window)
+            .load(
+                    function() {
+                        var JSON = {
+                            menu : [ {
+                                name : 'Title',
+                                link : '#',
+                                sub : [ {
+                                    name : 'Enclosure1',
+                                    link : '#',
+                                    sub : null
+                                }, {
+                                    name : 'Enclosure2',
+                                    link : '#',
+                                    sub : null
+                                }, {
+                                    name : 'Enclosure3',
+                                    link : '#',
+                                    sub : null
+                                } ]
+                            },{
+                                name : 'Link',
+                                link : '#',
+                                sub : null
+                            },{
+                                name : 'Content',
+                                link : '#',
+                                sub : null
+                            },{
+                                name : 'Enclosures',
+                                link : '#',
+                                sub : [ {
+                                    name : 'Enclosure1',
+                                    link : '#',
+                                    sub : null
+                                }, {
+                                    name : 'Enclosure2',
+                                    link : '#',
+                                    sub : null
+                                }, {
+                                    name : 'Enclosure3',
+                                    link : '#',
+                                    sub : null
+                                } ]
+                            }, {
+                                name : 'Authors',
+                                link : '#',
+                                sub : [ {
+                                    name : 'Author1',
+                                    link : '#',
+                                    sub : null
+                                }, {
+                                    name : 'Author2',
+                                    link : '#',
+                                    sub : null
+                                } ]
+                            },{
+                                name : 'Published At',
+                                link : '#',
+                                sub : null
+                            }, {
+                                name : 'Stream',
+                                link : '#',
+                                sub : [ {
+                                    name : 'STR1',
+                                    link : '#',
+                                    sub : null
+                                }, {
+                                    name : 'STR2',
+                                    link : '#',
+                                    sub : null
+                                } ]
+                            } ]
+                        }
+
+                        $(function() {
+
+                            function parseMenu(ul, menu) {
+                                for (var i = 0; i < menu.length; i++) {
+                                    var li = $(ul).append(
+                                            '<li class='+(menu[i].sub?'multi':'simple')+'>'+ menu[i].name
+                                                    + '</li>');
+                                    if (menu[i].sub != null) {
+                                        var subul = $('<ul class="list"></ul>');
+                                        $(li).append(subul);
+                                        parseMenu($(subul), menu[i].sub);
+                                            }
+                                }
+                            }
+
+                            var menu = $('#menu');
+                            parseMenu(menu, JSON.menu);
+                        });
+                    });//]]>​
+</script>
+<script type="text/javascript">$(document).on('click', '.list > li ', function () {
+    $(this).next('ul').toggle(200);
+    if(($(this).next('ul').length)){
+      $(this).toggleClass('multi-opened');
+    } 
+})</script>
+
+</body>
+</html>

@@ -1,21 +1,56 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>DOM to JSON</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <div class="div_class_1">
-            <p class="p_class_1">This is a paragraph.</p>
-            <ul class=>
+<html lang="en">
 
-            </ul>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DOM to JSON</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="div_class_1">
+        <p class="p_class_1">This is a paragraph.</p>
+        <p class="p_class_2">this is the second paragraph</p>
+        <div class="div_class_2">
+            <button class="button_class_1">Button</button>
         </div>
-        <script src="app.js" async defer></script>
-        <script type="module" src="Tree_view/scripts/treeview.js"></script>
-    </body>
+        <a href="">This is a link</a>
+    </div>
+
+    <ul is="expanding-list">
+        <li class="abcdefg">H</li>
+    </ul>
+
+    <!-- <ul is="expanding-list">
+        <li>Hello
+            <ul>
+                <li>Rust</li>
+                <li>Car</li>
+            </ul>
+        </li>
+    </ul> -->
+
+    <ul is="expanding-list">
+        <li class="abcdefg">H
+            <ul>
+                <li class="a87508">
+                    DIV 1
+                <li class="a36137">P 1</li>
+                <li class="a3343">P 1</li>
+                <li class="a90905">DIV 1<ul>
+                        <li class="a12146">BUTTON 1</li>
+                    </ul>
+                </li>
+                <li class="a56563">A 1</li>
+        </li>
+    </ul>
+    </li>
+    </ul>
+    <script src="app.js" async defer></script>
+    <script type="module" src="Tree_view/scripts/treeview.js"></script>
+</body>
+
 </html>
