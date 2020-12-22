@@ -7,6 +7,8 @@ document.querySelector('.div_class_1').addEventListener('click', function () {
     console.log(t);
     process.createTree(t, null);
 
+    // process.addEventListenersToLiNodes();
+
 });
 
 if (!window.Node) {
@@ -129,7 +131,7 @@ class process {
         }
 
         // Create element
-        var element_to_insert_ul_part = document.createElement("ul");
+        var element_to_insert_ul_part = document.createElement("ul", { is: 'expanding-list' });
         var element_to_insert_li_part = document.createElement("li");
 
         var text_field = document.createTextNode(/* The data from the object to be displayed */ obj.tagName + ' ' + obj.nodeType);
@@ -137,11 +139,41 @@ class process {
         element_to_insert_li_part.classList.add(obj.unique_id);
         element_to_insert_ul_part.appendChild(element_to_insert_li_part);
 
-        if (parent.childNodes == null || parent.childNodes.length == 3) {
+
+
+        function isThisSecondOrLaterHTMLChildNode(obj, parent) {
+
+            var flag = false;
+
+            for (var i = 0; i < parent.childNodes.length; i++) {
+                if (parent.childNodes[i].nodeType === Node.ELEMENT_NODE) {
+
+                    if (parent.childNodes[i] === obj) {
+                        if (!flag) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+
+                    if (!flag) {
+                        flag = true;
+                    }
+                }
+            }
+            return true;
+        }
+
+        if (parent.childNodes === null || !isThisSecondOrLaterHTMLChildNode(obj, parent)) {
+
+            element_to_insert_ul_part.classList.add(`C${parent.unique_id}`);
             document.querySelector(`.${parent.unique_id}`).appendChild(element_to_insert_ul_part);
+            var t = document.querySelector(`.${parent.unique_id}`);
+            t.classList.remove(`${parent.unique_id}`);
+
         }
         else {
-            document.querySelector(`.${parent.unique_id}`).appendChild(element_to_insert_li_part);
+            document.querySelector(`.C${parent.unique_id}`).appendChild(element_to_insert_li_part);
         }
 
         if (obj.childNodes) {
@@ -151,6 +183,17 @@ class process {
                 if (obj.childNodes[i].nodeType === Node.ELEMENT_NODE)
                     this.createTree(obj.childNodes[i], obj);
             }
+        }
+    }
+    static addEventListenersToLiNodes() {
+        var l = document.querySelectorAll("li");
+
+        for (var i = 0; i < l.length; i++) {
+            l[i].addEventListener('click', function () {
+                for (var j = 0; j < this.childNodes.length; j++) {
+                    this.childNodes[j].style.display = (this.childNodes[j].style.display === 'none') ? 'block' : 'none';
+                }
+            });
         }
     }
 }
@@ -275,6 +318,8 @@ class ExpandingList extends HTMLUListElement {
             nextul.parentNode.setAttribute('class', 'open');
         }
     };
+
+
 }
 
 // Define the new element
